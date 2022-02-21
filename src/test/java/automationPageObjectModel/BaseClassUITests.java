@@ -13,24 +13,26 @@ import utilities.DriverFactory;
 public class BaseClassUITests {
     public WebDriver driver;
     Logger LOGGER = LogManager.getLogger(this.getClass().getName());
-    String testCaseName = String.format("------Test: %s-------",this.getClass().getName());
-    String endTestCase = String.format("-------End Test: %s-------",this.getClass().getName());
+    String testCaseName = String.format("------Test: %s-------", this.getClass().getName());
+    String endTestCase = String.format("-------End Test: %s-------", this.getClass().getName());
 
     @BeforeClass
-    public void addThread(){
+    public void addThread() {
         ThreadContext.put("threadName", this.getClass().getName());
         driver = DriverFactory.getInstance().getDriver();
     }
+
     @BeforeMethod
-    public void browserInitialization(){
+    public void browserInitialization() {
         LOGGER.info(testCaseName);
         ActOn.browser(driver).openBrowser("https://www.mortgagecalculator.org/");
 
     }
-    @AfterMethod
-    public void quitBrowser(){
-        ActOn.browser(driver).close();
-        LOGGER.info(endTestCase);
-    }
 
+    @AfterMethod
+    public void quitBrowser() {
+        DriverFactory.getInstance().removeDriver();
+        LOGGER.info(endTestCase);
+
+    }
 }

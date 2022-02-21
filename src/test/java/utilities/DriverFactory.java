@@ -12,14 +12,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DriverFactory {
-
-    // It will not allow to create an Object outside from this class
-    private DriverFactory(){
+    // It will not allow to create an object outside from this class
+    private DriverFactory() {
         // Empty constructor
     }
+
     private static final DriverFactory instance = new DriverFactory();
 
-    public static DriverFactory getInstance(){
+    public static DriverFactory getInstance() {
         return instance;
     }
 
@@ -29,36 +29,33 @@ public class DriverFactory {
         URL gridUrl = null;
 
         try {
-            gridUrl = new URL("GridUrl");
+            //gridUrl = new URL("http://3.15.190.253:4444/wd/hub");
+            gridUrl = new URL(ReadConfigFiles.getPropertyValues("GridUrl"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
-        if(environment.equals("remote") && browser.equals("chrome")){
+        if (environment.equals("remote") && browser.equals("chrome")) {
             ChromeOptions chromeOptions = new ChromeOptions();
-            
-            return new RemoteWebDriver(gridUrl,chromeOptions);
-
-        }else if(environment.equals("remote") && browser.equals("firefox")){
+            return new RemoteWebDriver(gridUrl, chromeOptions);
+        } else if (environment.equals("remote") && browser.equals("firefox")) {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
-
-            return new RemoteWebDriver(gridUrl,firefoxOptions);
-        }else if(environment.equals("remote") && browser.equals("edge")){
+            return new RemoteWebDriver(gridUrl, firefoxOptions);
+        } else if (environment.equals("remote") && browser.equals("edge")) {
             EdgeOptions edgeOptions = new EdgeOptions();
-
-            return new RemoteWebDriver(gridUrl,edgeOptions);
-        }else{
+            return new RemoteWebDriver(gridUrl, edgeOptions);
+        } else {
             WebDriverManager.chromedriver().setup();
             return new ChromeDriver();
         }
-
     });
-    public WebDriver getDriver(){
+
+    public WebDriver getDriver() {
         return driver.get();
     }
-    public void removeDriver(){
+
+    public void removeDriver() {
         driver.get().quit();
         driver.remove();
     }
-
 }
