@@ -7,7 +7,7 @@ import utilities.RetryFailedTests;
 
 public class CalculateMortgageRatePOM extends BaseClassUITests {
 
-    @Test(retryAnalyzer = RetryFailedTests.class)
+    @Test
     public void calculateMonthlyPayment(){
 
         String date = DateUtils.returnNextMonth();

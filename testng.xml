@@ -1,6 +1,12 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Test_Automation" verbose="1" >
+<suite name="Test_Automation" verbose="1" parallel="classes">
+    <test name="selenium_grid">
+        <classes>
+            <class name="automationPageObjectModel.CalculateMortgageRatePOM"/>
+            <class name="automationPageObjectModel.CalculateRealAprRatePOM"/>
+        </classes>
+    </test>
 
 
 <!--    <test name="Mortgage_Calculator" >-->
@@ -30,9 +36,9 @@
 <!--        </packages>-->
 <!--    </test>-->
 
-    <test name="API_TEST">
-        <packages>
-            <package name="api_test"/>
-        </packages>
-    </test>
+<!--    <test name="API_TEST">-->
+<!--        <packages>-->
+<!--            <package name="api_test"/>-->
+<!--        </packages>-->
+<!--    </test>-->
 </suite>

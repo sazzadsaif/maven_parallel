@@ -6,7 +6,7 @@ import utilities.RetryFailedTests;
 
 public class CalculateRealAprRatePOM extends BaseClassUITests {
 
-    @Test(retryAnalyzer = RetryFailedTests.class)
+    @Test
     public void calculateRealApr(){
         new NavigationBar(driver)
                 .mouseHoverToRates()

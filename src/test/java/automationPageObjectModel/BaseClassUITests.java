@@ -18,7 +18,7 @@ public class BaseClassUITests {
 
     @BeforeClass
     public void addThread(){
-        ThreadContext.put("threadName",this.getClass().getName());
+        ThreadContext.put("threadName", this.getClass().getName());
         driver = DriverFactory.getInstance().getDriver();
     }
     @BeforeMethod
@@ -29,7 +29,7 @@ public class BaseClassUITests {
     }
     @AfterMethod
     public void quitBrowser(){
-        DriverFactory.getInstance().removeDriver();
+        ActOn.browser(driver).close();
         LOGGER.info(endTestCase);
     }
 
